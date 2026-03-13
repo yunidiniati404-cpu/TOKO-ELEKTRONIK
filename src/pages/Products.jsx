@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import { formatRupiah } from "../utils/formatCurrency";
-import "./Books.css";
+import "./Products.css";
 
-function Books() {
+function Products() {
   const { addToCart } = useContext(CartContext);
   const [selectedCategory, setSelectedCategory] = useState("semua");
   const [books, setBooks] = useState([]);
@@ -149,13 +149,13 @@ function Books() {
   };
 
   return (
-    <div className="books-container">
-      <div className="books-header">
+    <div className="products-container">
+      <div className="products-header">
         <h1>Koleksi Elektronik Kami</h1>
         <p>Temukan berbagai pilihan produk elektronik terbaik Anda</p>
       </div>
 
-      <div className="books-filter">
+      <div className="products-filter">
         <h3>Kategori</h3>
         <div className="filter-buttons">
           {categories.map((cat) => (
@@ -172,7 +172,7 @@ function Books() {
         </div>
       </div>
 
-      <div className="books-grid">
+      <div className="products-grid">
         {filteredBooks.map((book) => (
           <div key={book.id} className="book-card">
             <div className="book-image-wrapper">
@@ -239,4 +239,4 @@ function Books() {
   );
 }
 
-export default Books;
+export default Products;

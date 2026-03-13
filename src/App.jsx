@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from
 import { CartProvider } from "./context/CartContext";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Books from "./pages/Books";
+import Products from "./pages/Products";
 import ShoppingCart from "./pages/ShoppingCart";
 import OrderHistory from "./pages/OrderHistory";
 import Profile from "./pages/Profile";
@@ -45,7 +45,7 @@ function App() {
             element={
               isLoggedIn ? (
                 <ProtectedLayout sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}>
-                  <Books />
+                  <Products />
                 </ProtectedLayout>
               ) : (
                 <Navigate to="/" />

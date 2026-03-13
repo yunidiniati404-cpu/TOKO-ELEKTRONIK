@@ -59,29 +59,10 @@ function Dashboard() {
           <p>Anda telah berhasil login ke sistem ELECTRONIC STORE kami.</p>
         </div>
 
-        <div className="stats-container">
-          <div className="stat-card">
-            <h3>Total Elektronik</h3>
-            <p className="stat-number">{stats.totalBooks}</p>
-          </div>
-          <div className="stat-card">
-            <h3>👥 Total Pengguna</h3>
-            <p className="stat-number">{stats.totalUsers}</p>
-          </div>
-          <div className="stat-card">
-            <h3>📦 Total Pesanan</h3>
-            <p className="stat-number">{stats.totalOrders}</p>
-          </div>
-          <div className="stat-card">
-            <h3>💰 Total Pendapatan</h3>
-            <p className="stat-number">{formatRupiahShort(stats.totalRevenue)}</p>
-          </div>
-        </div>
-
         <div className="menu-container">
           <h3>Menu Utama</h3>
           <div className="menu-buttons">
-            <button className="menu-btn" onClick={() => navigate("/books")}>
+            <button className="menu-btn" onClick={() => navigate("/products")}>
               � Jelajahi Elektronik
             </button>
             <button className="menu-btn" onClick={() => navigate("/cart")}>

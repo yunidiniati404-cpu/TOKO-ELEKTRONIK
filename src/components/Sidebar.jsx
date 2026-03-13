@@ -9,7 +9,7 @@ function Sidebar({ isOpen, setIsOpen, onLogout }) {
 
   const menuItems = [
     { icon: "🏠", label: "Dashboard", path: "/dashboard" },
-    { icon: "/ELECTRONIC STORE", label: "Elektronik", path: "/books", isImage: true },
+    { icon: "/ELECTRONIC STORE", label: "Elektronik", path: "/products", isImage: true },
     { icon: "🛒", label: "Keranjang", path: "/cart", badge: getTotalItems() },
     { icon: "📦", label: "Pesanan", path: "/orders" },
     { icon: "👤", label: "Profil", path: "/profile" },

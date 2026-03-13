@@ -1,4 +1,4 @@
-.books-container {
+.products-container {
   min-height: 100vh;
   padding: 40px 20px;
   background: linear-gradient(135deg, #0f172a 0%, #1a3a52 100%);
@@ -37,7 +37,7 @@
   }
 }
 
-.books-header {
+.products-header {
   max-width: 1200px;
   margin: 0 auto 40px;
   text-align: center;
@@ -45,18 +45,18 @@
   animation: fadeInDown 0.6s ease-out;
 }
 
-.books-header h1 {
+.products-header h1 {
   font-size: 36px;
   margin-bottom: 10px;
   font-weight: 700;
 }
 
-.books-header p {
+.products-header p {
   font-size: 18px;
   opacity: 0.9;
 }
 
-.books-filter {
+.products-filter {
   max-width: 1200px;
   margin: 0 auto 30px;
   background: white;
@@ -67,7 +67,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.books-filter h3 {
+.products-filter h3 {
   color: #333;
   margin-bottom: 15px;
   font-weight: 600;
@@ -105,7 +105,7 @@
   box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
 }
 
-.books-grid {
+.products-grid {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -342,7 +342,7 @@
 }
 
 @media (max-width: 768px) {
-  .books-grid {
+  .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 15px;
   }
