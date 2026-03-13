@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Compact logo -->
+  <circle cx="50" cy="50" r="48" fill="#0F1419" stroke="#00D4FF" stroke-width="2"/>
+  
+  <!-- Device -->
+  <rect x="30" y="30" width="40" height="32" fill="none" stroke="#00D4FF" stroke-width="1.5" rx="3"/>
+  <rect x="32" y="32" width="36" height="28" fill="#00D4FF" opacity="0.12" rx="2"/>
+  
+  <!-- Stand -->
+  <rect x="42" y="62" width="16" height="4" fill="#00D4FF" rx="1"/>
+</svg>

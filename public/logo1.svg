@@ -1,0 +1,14 @@
+<svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="75" cy="75" r="70" fill="#0F1419" stroke="#00D4FF" stroke-width="2"/>
+  
+  <!-- Device outline -->
+  <rect x="40" y="45" width="70" height="55" fill="none" stroke="#00D4FF" stroke-width="2" rx="6"/>
+  
+  <!-- Screen -->
+  <rect x="45" y="50" width="60" height="40" fill="#1A2332" stroke="#00D4FF" stroke-width="1" rx="3"/>
+  <rect x="47" y="52" width="56" height="36" fill="#00D4FF" opacity="0.1" rx="2"/>
+  
+  <!-- Device stand -->
+  <rect x="60" y="105" width="30" height="6" fill="#00D4FF" rx="2"/>
+</svg>
