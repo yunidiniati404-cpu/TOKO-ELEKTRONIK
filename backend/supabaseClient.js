@@ -1,0 +1,8 @@
+const { createClient } = require('@supabase/supabase-js')
+
+const supabaseUrl = process.env.SUPABASE_URL || 'https://xuiwvtkaoyiibivapuef.supabase.co'
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh1aXd2dGthb3lpaWJpdmFwdWVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0ODI2MTMsImV4cCI6MjA4OTA1ODYxM30.mfTuuV36E6Co2wva2k5NP--z3e0XyGc5lTXkxBn2wow'
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+module.exports = supabase

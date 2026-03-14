@@ -1,0 +1,120 @@
+.admin-panel {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-panel h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.admin-tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.admin-tabs button {
+  background: #e9ecef;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  margin-right: 5px;
+}
+
+.admin-tabs button.active {
+  background: #007bff;
+  color: white;
+}
+
+.crud-section h4 {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.product-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.product-form textarea {
+  grid-column: span 2;
+  min-height: 60px;
+}
+
+.product-form button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  grid-column: span 2;
+}
+
+.product-form button[type="button"] {
+  background: #6c757d;
+  margin-left: 10px;
+  grid-column: span 1;
+}
+
+.data-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.data-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background: white;
+}
+
+.data-item img {
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.data-item div {
+  flex: 1;
+}
+
+.data-item button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.data-item button:hover {
+  background: #0056b3;
+}
+
+.data-item button:nth-child(2) {
+  background: #dc3545;
+}
+
+.data-item button:nth-child(2):hover {
+  background: #c82333;
+}

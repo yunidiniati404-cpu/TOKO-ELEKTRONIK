@@ -904,6 +904,131 @@ app.get("/api/users", verifyToken, verifyAdmin, async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/users/{userId}/role:
+ *   put:
+ *     summary: Update user role (Admin only)
+ *     tags: [Users]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: User ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               role:
+ *                 type: string
+ *                 enum: [user, admin]
+ *     responses:
+ *       200:
+ *         description: Role updated successfully
+ *       403:
+ *         description: Forbidden
+ *       404:
+ *         description: User not found
+ */
+app.put("/api/users/:userId/role", verifyToken, verifyAdmin, async (req, res) => {
+  const { userId } = req.params;
+  const { role } = req.body;
+
+  if (!["user", "admin"].includes(role)) {
+    return res.status(400).json({ error: "Invalid role" });
+  }
+
+  try {
+    const connection = await pool.getConnection();
+
+    const [result] = await connection.execute(
+      "UPDATE users SET role = ? WHERE id = ?",
+      [role, userId]
+    );
+
+    connection.release();
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ message: "Role updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to update role" });
+  }
+});
+
+/**
+ * @swagger
+ * /api/orders/{orderId}/status:
+ *   put:
+ *     summary: Update order status (Admin only)
+ *     tags: [Orders]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: orderId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Order ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: string
+ *                 enum: [Pending, Dalam Pengiriman, Selesai, Dibatalkan]
+ *     responses:
+ *       200:
+ *         description: Status updated successfully
+ *       403:
+ *         description: Forbidden
+ *       404:
+ *         description: Order not found
+ */
+app.put("/api/orders/:orderId/status", verifyToken, verifyAdmin, async (req, res) => {
+  const { orderId } = req.params;
+  const { status } = req.body;
+
+  const validStatuses = ["Pending", "Dalam Pengiriman", "Selesai", "Dibatalkan"];
+  if (!validStatuses.includes(status)) {
+    return res.status(400).json({ error: "Invalid status" });
+  }
+
+  try {
+    const connection = await pool.getConnection();
+
+    const [result] = await connection.execute(
+      "UPDATE orders SET status = ? WHERE id = ?",
+      [status, orderId]
+    );
+
+    connection.release();
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    res.json({ message: "Status updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to update status" });
+  }
+});
+
 // Health check
 app.get("/api/health", (req, res) => {
   res.json({ status: "Server is running" });
