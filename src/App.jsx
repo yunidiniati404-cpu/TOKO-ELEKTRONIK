@@ -41,7 +41,7 @@ function App() {
             }
           />
           <Route
-            path="/books"
+            path="/products"
             element={
               isLoggedIn ? (
                 <ProtectedLayout sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}>
@@ -131,7 +131,7 @@ function ProtectedLayout({ children, sidebarOpen, setSidebarOpen }) {
           )}
           <h1>ELECTRONIC STORE</h1>
           <button className="logout-top" onClick={handleLogout} title="Logout">
-            🚪
+            LOGOUT
           </button>
         </header>
         <main>{children}</main>

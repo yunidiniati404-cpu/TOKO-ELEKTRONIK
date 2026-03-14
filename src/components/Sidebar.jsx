@@ -9,7 +9,7 @@ function Sidebar({ isOpen, setIsOpen, onLogout }) {
 
   const menuItems = [
     { icon: "🏠", label: "Dashboard", path: "/dashboard" },
-    { icon: "/ELECTRONIC STORE", label: "Elektronik", path: "/products", isImage: true },
+    { icon: "/logo-electronics.svg", label: "Elektronik", path: "/products", isImage: true },
     { icon: "🛒", label: "Keranjang", path: "/cart", badge: getTotalItems() },
     { icon: "📦", label: "Pesanan", path: "/orders" },
     { icon: "👤", label: "Profil", path: "/profile" },
@@ -65,7 +65,6 @@ function Sidebar({ isOpen, setIsOpen, onLogout }) {
 
         <div className="sidebar-footer">
           <button className="logout-btn" onClick={handleLogout}>
-            🚪 Logout
           </button>
         </div>
       </div>

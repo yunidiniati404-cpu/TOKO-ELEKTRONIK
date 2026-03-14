@@ -8,7 +8,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const { orders, user } = useContext(CartContext);
   const [stats, setStats] = useState({
-    totalBooks: 0,
+    totalproducts: 0,
     totalUsers: 0,
     totalOrders: 0,
     totalRevenue: 0
@@ -29,7 +29,7 @@ function Dashboard() {
         const totalRevenue = orders.reduce((sum, order) => sum + (order.total || 0), 0);
         
         setStats({
-          totalBooks: products.length || 8,
+          totalproducts: products.length || 8,
           totalUsers: 1, // Minimal ada 1 user (yang login)
           totalOrders: orders.length || 0,
           totalRevenue: totalRevenue || 0
@@ -38,7 +38,7 @@ function Dashboard() {
         console.error("Error fetching stats:", err);
         // Fallback values
         setStats({
-          totalBooks: 8,
+          totalproducts: 8,
           totalUsers: 1,
           totalOrders: orders.length || 0,
           totalRevenue: orders.reduce((sum, order) => sum + (order.total || 0), 0) || 0

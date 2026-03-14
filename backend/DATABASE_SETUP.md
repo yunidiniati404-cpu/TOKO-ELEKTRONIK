@@ -208,7 +208,7 @@ products
 orders
 
 count(*): 1 (admin user)
-count(*): 8 (8 default books)
+count(*): 8 (8 default products)
 ```
 
 ---

@@ -37,7 +37,7 @@ function ShoppingCart() {
               <p>Keranjang belanja Anda kosong</p>
               <button
                 className="continue-shopping"
-                onClick={() => navigate("/books")}
+                onClick={() => navigate("/products")}
               >
                 ← Lanjut Belanja
               </button>
@@ -109,7 +109,7 @@ function ShoppingCart() {
               <div className="cart-actions">
                 <button
                   className="continue-shopping"
-                  onClick={() => navigate("/books")}
+                  onClick={() => navigate("/products")}
                 >
                   ← Lanjut Belanja
                 </button>

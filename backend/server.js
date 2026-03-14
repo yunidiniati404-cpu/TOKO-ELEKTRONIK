@@ -112,20 +112,23 @@ const initDatabase = async () => {
       )
     `);
 
-    // Create products table
+    // Create products table with new schema
     await connection.execute(`
       CREATE TABLE IF NOT EXISTS products (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        author VARCHAR(255),
-        price DECIMAL(10, 2) NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        brand VARCHAR(255),
+        price VARCHAR(20) NOT NULL,
         category VARCHAR(50),
         image VARCHAR(500),
-        rating DECIMAL(3, 1),
+        rating VARCHAR(10),
         reviews INT DEFAULT 0,
         discount INT DEFAULT 0,
+        description TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_category (category),
+        INDEX idx_brand (brand)
       )
     `);
 
@@ -160,25 +163,25 @@ const initDatabase = async () => {
     // Check if products exist
     const [products] = await connection.execute("SELECT COUNT(*) as count FROM products");
     if (products[0].count === 0) {
-      console.log("📚 Inserting default products...");
+      console.log("� Inserting default electronics products...");
       const defaultProducts = [
-        ["Clean Code", "Robert C. Martin", 189000, "programming", "https://images-na.ssl-images-amazon.com/images/P/0132350882.01.L.jpg", 4.8, 45, 15],
-        ["The Pragmatic Programmer", "David Thomas, Andrew Hunt", 185000, "programming", "https://covers.openlibrary.org/b/id/8338103-L.jpg", 4.7, 38, 10],
-        ["Design Patterns", "Gang of Four", 225000, "programming", "https://images-na.ssl-images-amazon.com/images/P/0201633612.01.L.jpg", 4.6, 52, 5],
-        ["1984", "George Orwell", 95000, "fiksi", "https://images-na.ssl-images-amazon.com/images/P/0451524934.01.L.jpg", 4.9, 128, 20],
-        ["Sapiens", "Yuval Noah Harari", 135000, "nonfiksi", "https://images-na.ssl-images-amazon.com/images/P/0062316095.01.L.jpg", 4.8, 95, 0],
-        ["Atomic Habits", "James Clear", 105000, "self-help", "https://images-na.ssl-images-amazon.com/images/P/0735211299.01.L.jpg", 4.9, 210, 25],
-        ["The Silent Patient", "Alex Michaelides", 89000, "fiksi", "https://images-na.ssl-images-amazon.com/images/P/1250301696.01.L.jpg", 4.7, 67, 12],
-        ["Mindset", "Carol S. Dweck", 125000, "self-help", "https://images-na.ssl-images-amazon.com/images/P/0345472322.01.L.jpg", 4.6, 143, 8],
+        ["MacBook Pro 16\" M3 Max", "Apple", "45000000.00", "laptops", "https://images.samsung.com/is/image/samsung/p6pim/id/ls49cg954elxzd/gallery/id-c49g95t-odyssey-g9-gaming-monitor-ls49cg954elxzd-535571082?$650_519_PNG$", "4.9", 156, 8, "MacBook Pro 16 inci dengan chip M3 Max terbaru, layar Liquid Retina XDR 16.2 inci, RAM 32GB, SSD 1TB. Performa luar biasa untuk kreator profesional."],
+        ["iPhone 15 Pro Max 1TB", "Apple", "22999000.00", "smartphones", "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-pro-2nd-gen-hero-select-202409?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1725492498882", "4.8", 289, 5, "iPhone 15 Pro Max dengan penyimpanan 1TB, chip A17 Pro, kamera 48MP, dan Action Button. Desain titanium yang elegan dan tahan lama."],
+        ["Samsung Galaxy S24 Ultra", "Samsung", "19999000.00", "smartphones", "https://images.samsung.com/is/image/samsung/p6pim/id/ls49cg954elxzd/gallery/id-c49g95t-odyssey-g9-gaming-monitor-ls49cg954elxzd-535571082?$650_519_PNG$", "4.7", 345, 12, "Samsung Galaxy S24 Ultra dengan S Pen, kamera 200MP, layar Dynamic AMOLED 2X 6.8 inci, dan baterai 5000mAh. Flagship Android terbaik."],
+        ["Sony WH-1000XM5 Wireless", "Sony", "4999000.00", "audio", "https://www.dji.com/medias/en/products/mini-3-pro/gallery/DJI_Mini_3_Pro_Gallery_Image_01.png", "4.9", 512, 15, "Headphone wireless premium dengan noise cancelling terbaik, baterai 30 jam, fast charging 3 menit untuk 3 jam, dan kualitas suara Hi-Res Audio."],
+        ["Dell XPS 13 Plus", "Dell", "18999000.00", "laptops", "https://gopro.com/content/dam/gopro/products/hero11-silver/hero11-silver-front.png", "4.6", 198, 10, "Dell XPS 13 Plus dengan layar InfinityEdge 13.4 inci 3.5K, prosesor Intel Core i7-1360P, RAM 16GB, SSD 512GB. Laptop premium ultrabook."],
+        ["iPad Pro 12.9\" M2", "Apple", "17999000.00", "tablets", "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-pro-2nd-gen-hero-select-202409?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1725492498882", "4.8", 267, 7, "iPad Pro 12.9 inci dengan chip M2, layar Liquid Retina XDR, Apple Pencil Pro, dan Magic Keyboard. Alat produktivitas ultimate."],
+        ["Samsung Galaxy Buds2 Pro", "Samsung", "2299000.00", "audio", "https://images.samsung.com/is/image/samsung/p6pim/id/ls49cg954elxzd/gallery/id-c49g95t-odyssey-g9-gaming-monitor-ls49cg954elxzd-535571082?$650_519_PNG$", "4.6", 423, 20, "Galaxy Buds2 Pro dengan active noise cancelling 2X lebih baik, audio 360, baterai 8 jam, dan fitur kesehatan seperti pelacakan tidur."],
+        ["Apple Magic Keyboard", "Apple", "1999000.00", "accessories", "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-pro-2nd-gen-hero-select-202409?wid=470&hei=556&fmt=jpeg&qlt=95&.v=1725492498882", "4.5", 189, 0, "Magic Keyboard dengan desain tipis, baterai tahan lama, dan koneksi wireless yang stabil. Kompatibel dengan semua perangkat Apple."]
       ];
 
       for (const product of defaultProducts) {
         await connection.execute(
-          "INSERT INTO products (title, author, price, category, image, rating, reviews, discount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+          "INSERT INTO products (name, brand, price, category, image, rating, reviews, discount, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
           product
         );
       }
-      console.log("✅ Default products inserted (8 books)");
+      console.log("✅ Default electronics products inserted (8 products)");
     }
 
     connection.release();
@@ -435,36 +438,40 @@ app.get("/api/products", async (req, res) => {
  *           schema:
  *             type: object
  *             required:
- *               - title
- *               - author
+ *               - name
+ *               - brand
  *               - price
  *               - category
  *               - image
  *             properties:
- *               title:
+ *               name:
  *                 type: string
- *                 example: Clean Code
- *               author:
+ *                 example: MacBook Pro 16" M3 Max
+ *               brand:
  *                 type: string
- *                 example: Robert C. Martin
+ *                 example: Apple
  *               price:
- *                 type: number
- *                 example: 150000
+ *                 type: string
+ *                 example: 45000000.00
  *               category:
  *                 type: string
- *                 example: Programming
+ *                 enum: [laptops, smartphones, tablets, audio, gaming, accessories]
+ *                 example: laptops
  *               image:
  *                 type: string
- *                 example: https://example.com/image.jpg
+ *                 example: https://images.samsung.com/...
  *               rating:
- *                 type: number
- *                 example: 4.8
+ *                 type: string
+ *                 example: 4.9
  *               reviews:
- *                 type: number
- *                 example: 234
+ *                 type: integer
+ *                 example: 156
  *               discount:
- *                 type: number
- *                 example: 10
+ *                 type: integer
+ *                 example: 8
+ *               description:
+ *                 type: string
+ *                 example: MacBook Pro 16 inci dengan chip M3 Max terbaru...
  *     responses:
  *       201:
  *         description: Produk berhasil ditambahkan
@@ -475,17 +482,17 @@ app.get("/api/products", async (req, res) => {
  */
 app.post("/api/products", verifyToken, verifyAdmin, async (req, res) => {
   try {
-    const { title, author, price, category, image, rating, reviews, discount } = req.body;
+    const { name, brand, price, category, image, rating, reviews, discount, description } = req.body;
     const connection = await pool.getConnection();
 
     await connection.execute(
-      "INSERT INTO products (title, author, price, category, image, rating, reviews, discount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-      [title, author, price, category, image, rating || 0, reviews || 0, discount || 0]
+      "INSERT INTO products (name, brand, price, category, image, rating, reviews, discount, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [name, brand, price, category, image, rating || "0", reviews || 0, discount || 0, description || ""]
     );
 
     const [newProduct] = await connection.execute(
-      "SELECT * FROM products WHERE title = ? AND author = ?",
-      [title, author]
+      "SELECT * FROM products WHERE name = ? AND brand = ? ORDER BY id DESC LIMIT 1",
+      [name, brand]
     );
 
     connection.release();
@@ -519,22 +526,34 @@ app.post("/api/products", verifyToken, verifyAdmin, async (req, res) => {
  *           schema:
  *             type: object
  *             properties:
- *               title:
+ *               name:
  *                 type: string
- *               author:
+ *                 example: MacBook Pro 16" M3 Max
+ *               brand:
  *                 type: string
+ *                 example: Apple
  *               price:
- *                 type: number
+ *                 type: string
+ *                 example: 45000000.00
  *               category:
  *                 type: string
+ *                 enum: [laptops, smartphones, tablets, audio, gaming, accessories]
+ *                 example: laptops
  *               image:
  *                 type: string
+ *                 example: https://images.samsung.com/...
  *               rating:
- *                 type: number
+ *                 type: string
+ *                 example: 4.9
  *               reviews:
- *                 type: number
+ *                 type: integer
+ *                 example: 156
  *               discount:
- *                 type: number
+ *                 type: integer
+ *                 example: 8
+ *               description:
+ *                 type: string
+ *                 example: MacBook Pro 16 inci dengan chip M3 Max terbaru...
  *     responses:
  *       200:
  *         description: Produk berhasil diupdate
@@ -550,12 +569,12 @@ app.post("/api/products", verifyToken, verifyAdmin, async (req, res) => {
 app.put("/api/products/:productId", verifyToken, verifyAdmin, async (req, res) => {
   try {
     const { productId } = req.params;
-    const { title, author, price, category, image, rating, reviews, discount } = req.body;
+    const { name, brand, price, category, image, rating, reviews, discount, description } = req.body;
     const connection = await pool.getConnection();
 
     await connection.execute(
-      "UPDATE products SET title = ?, author = ?, price = ?, category = ?, image = ?, rating = ?, reviews = ?, discount = ? WHERE id = ?",
-      [title, author, price, category, image, rating, reviews, discount, productId]
+      "UPDATE products SET name = ?, brand = ?, price = ?, category = ?, image = ?, rating = ?, reviews = ?, discount = ?, description = ? WHERE id = ?",
+      [name, brand, price, category, image, rating, reviews, discount, description, productId]
     );
 
     const [updatedProduct] = await connection.execute(
@@ -898,7 +917,7 @@ initDatabase().then(() => {
     console.log("=".repeat(50));
     console.log(`🚀 Server: http://localhost:${PORT}`);
     console.log(`📚 Admin: username: admin | password: 123`);
-    console.log(`📖 API Docs: http://localhost:${PORT}/api/health`);
+    console.log(`📖 API Docs: http://localhost:${PORT}/api-docs/`);
     console.log("=".repeat(50) + "\n");
   });
 }).catch(error => {

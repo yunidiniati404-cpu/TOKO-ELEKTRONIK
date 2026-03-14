@@ -100,7 +100,7 @@ TOKO-ELEKTRONIK/
 │   ├── components/            # Reusable components
 │   ├── pages/                 # Page components
 │   │   ├── Dashboard.jsx      # Admin dashboard
-│   │   ├── Books.jsx          # Product catalog
+│   │   ├── products.jsx          # Product catalog
 │   │   ├── Login.jsx          # Authentication
 │   │   ├── ShoppingCart.jsx   # Cart management
 │   │   └── ...
