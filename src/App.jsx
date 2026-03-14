@@ -1,3 +1,4 @@
+// Main App component for TOKO ELEKTRONIK e-commerce application
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
